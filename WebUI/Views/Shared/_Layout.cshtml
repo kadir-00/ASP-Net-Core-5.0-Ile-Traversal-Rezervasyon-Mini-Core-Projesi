@@ -1,0 +1,115 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewData["Title"]</title>
+    <!-- google fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <!-- google fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/Template/css/style-liberty.css">
+    <!-- Template CSS -->
+	<!-- Sweetalert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    @await Component.InvokeAsync("WebUI.ViewComponents.Header")
+
+    @RenderBody()
+
+    @await Component.InvokeAsync("WebUI.ViewComponents.Footer")
+
+	<script>
+		if ("@TempData["text"]" != "")
+		{
+			Swal.fire({
+				position: "center",
+				icon: "@TempData["icon"]",
+				html: "@TempData["text"]",
+				showConfirmButton: false,
+				timer: 1500
+			});
+		}
+	</script>
+
+    <!-- Template JavaScript -->
+    <script src="/Template/js/jquery-3.3.1.min.js"></script>
+    <script src="/Template/js/theme-change.js"></script>
+    <!--/slider-js-->
+    <script src="/Template/js/jquery.min.js"></script>
+    <script src="/Template/js/modernizr-2.6.2.min.js"></script>
+    <script src="/Template/js/jquery.zoomslider.min.js"></script>
+    <!--//slider-js-->
+    <script src="/Template/js/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+        $(document).ready(function () {
+        $("#owl-demo1").owlCarousel({
+            loop: true,
+            margin: 20,
+            nav: false,
+            responsiveClass: true,
+            responsive: {
+            0: {
+                items: 1,
+                nav: false
+            },
+            736: {
+                items: 1,
+                nav: false
+            },
+            1000: {
+                items: 1,
+                nav: false,
+                loop: true
+            }
+            }
+        })
+        })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- stats number counter-->
+    <script src="/Template/js/jquery.waypoints.min.js"></script>
+    <script src="/Template/js/jquery.countup.js"></script>
+    <script>
+        $('.counter').countUp();
+    </script>
+    <!-- //stats number counter -->
+    <!--/MENU-JS-->
+    <script>
+        $(window).on("scroll", function () {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+        });
+
+        //Main navigation Active Class Add Remove
+        $(".navbar-toggler").on("click", function () {
+        $("header").toggleClass("active");
+        });
+        $(document).on("ready", function () {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function () {
+            if ($(window).width() > 991) {
+            $("header").removeClass("active");
+            }
+        });
+        });
+    </script>
+    <!--//MENU-JS-->
+
+    <script src="/Template/js/bootstrap.min.js"></script>
+
+</body>
+</html>

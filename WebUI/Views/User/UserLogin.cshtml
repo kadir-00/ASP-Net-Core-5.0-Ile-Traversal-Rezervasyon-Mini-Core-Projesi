@@ -1,0 +1,29 @@
+@model UserLoginModel
+@{
+    ViewData["Title"] = "UserLogin";
+    Layout = "_LayoutFormUser";
+}
+
+<form class="form-detail" asp-controller="User" asp-action="UserLogin" method="post">
+    <a asp-controller="Home" asp-action="Index" class="form-home-icon"><span class="fa-solid fa-house"></span></a>
+    <h2>Giriş Formu</h2>
+    <div class="validation-summary-text" asp-validation-summary="ModelOnly"></div>
+    <input type="hidden" asp-for="ReturnUrl">
+    <div class="form-row">
+        <span class="validation-text" asp-validation-for="Email"></span>
+        <label>Email *</label>
+        <input type="email" asp-for="Email" class="input-text" required>
+        <i class="fas fa-envelope"></i>
+    </div>
+    <div class="form-row">
+        <span class="validation-text" asp-validation-for="Password"></span>
+        <label>Şifre *</label>
+        <input type="password" asp-for="Password"  class="input-text" required>
+        <i class="fas fa-lock"></i>
+    </div>
+    <div class="form-row-last">
+        <input type="submit" name="register" class="register" value="Giriş Yap">
+        <a asp-controller="User" asp-action="UserRegister" class="login">Kayıt Ol</a>
+    </div>
+    <a asp-controller="User" asp-action="UserRePassword" style="font-size: 12px; padding: 0px; border: none;">Şifremi Unuttum</a>
+</form>

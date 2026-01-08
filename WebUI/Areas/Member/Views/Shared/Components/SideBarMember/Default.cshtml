@@ -1,0 +1,56 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+    <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <div class="navbar-brand m-0">
+            <i class="fa-solid fa-id-card" style="font-size: 25px;"></i>
+            <span class="ms-1 font-weight-bold" style="font-size: 18px;">Hesabım</span>
+        </div>
+    </div>
+    <hr class="horizontal dark mt-0">
+    <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Siteye Dön</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @ViewBag.profileActive" asp-area="Member" asp-controller="Profile" asp-action="ProfileIndex">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-tv"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Dashboard & Profil</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @ViewBag.myAccountActive" asp-area="Member" asp-controller="Profile" asp-action="ProfileUpdate">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">@localizer["Hesabım"]</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @ViewBag.reservationActive" asp-area="Member" asp-controller="Reservation" asp-action="ReservationList">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa-regular fa-calendar-days"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Rezervasyonlar</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="User" asp-action="UserLogout">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-arrow-right-from-bracket fa-flip-horizontal"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Çıkış Yap</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>

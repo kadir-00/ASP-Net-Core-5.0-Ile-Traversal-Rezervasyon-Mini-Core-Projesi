@@ -1,0 +1,55 @@
+@model Slider
+
+
+@if (Model != null)
+
+{
+    <section class="w3l-main-slider" id="home">
+        <div class="banner-content">
+            <div id="demo-1" data-zs-src='[ "@(Model.SliderImage)" ]' data-zs-overlay="dots">
+                <div class="demo-inner-content">
+                    <div class="container">
+                        <div class="banner-infhny">
+                            <h3>@Model.SliderTitle</h3>
+                            <h6 class="mb-3">@Model.SliderSubTitle</h6>
+                            <div class="flex-wrap search-wthree-field mt-md-5 mt-4">
+                                <form asp-controller="Destination" asp-action="DestinationDetail" method="get"
+                                    class="booking-form">
+                                    <div class="row book-form">
+                                        <div class="form-input col-md-4 mt-md-0 mt-3">
+                                            <select name="id" class="selectpicker">
+                                                <option value="">Rotalar</option>
+                                                @if (ViewBag.destinations != null)
+
+                                                {
+                                                    @foreach (var item in ViewBag.destinations)
+
+                                                    {
+                                                        <option value="@item.DestinationId">@item.DestinationCity</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                        @* <div class="form-input col-md-4 mt-md-0 mt-3">
+                                    <input type="date" name="" placeholder="Date" required="">
+                                    </div> *@
+                                        <div class="bottom-btn col-md-4 mt-md-0 mt-3">
+                                            <button class="btn btn-style btn-secondary" type="submit"><span
+                                                    class="fa fa-search mr-3" aria-hidden="true"></span> Ara</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+else
+
+{
+    <div class="alert alert-warning">Slider verisi bulunamadı. Lütfen admin panelinden veri ekleyin.</div>
+}

@@ -1,0 +1,42 @@
+using Entity.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
+namespace Data.Concrete
+{
+    public class Context : IdentityDbContext<AppUser, AppRole, int>
+    {
+        public Context(DbContextOptions<Context> options) : base(options)
+        {
+        }
+
+        public Context()
+        {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=TraversalDB;Integrated Security=True;TrustServerCertificate=True;");
+            }
+        }
+
+        public DbSet<About> Abouts { get; set; }
+        public DbSet<AccountUOfWork> AccountUOfWorks { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Announcement> Announcements { get; set; }
+        public DbSet<Banner> Banners { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Destination> Destinations { get; set; }
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Newsletter> Newsletters { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<Testimonial> Testimonials { get; set; }
+
+    }
+}

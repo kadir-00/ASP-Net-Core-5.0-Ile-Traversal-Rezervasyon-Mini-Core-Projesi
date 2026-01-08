@@ -1,0 +1,163 @@
+@model Destination
+@{
+    ViewData["Title"] = "DestinationDetail";
+    Layout = "_Layout";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- blog breadcrumb -->
+<section class="w3l-about-breadcrumb text-left">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+        <div class="container">
+            <h2 class="title">@Model.DestinationCity</h2>
+            <ul class="breadcrumbs-custom-path mt-2">
+                <li><a asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
+                <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> @Model.DestinationCity </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!--/blog-->
+<div class="py-5 w3l-homeblock1 text-center">
+    <div class="container mt-md-3">
+        <h3 class="blog-desc-big text-center mb-4">Your Blog Posts are Boring? Here are 9 Tips for
+            Making your Writing more Interesting</h3>
+        <div class="blog-post-align">
+            <div class="blog-post-img">
+                <a href="#"><img src="/Template/images/c1.jpg" alt="" class="rounded-circle img-fluid" /></a>
+            </div>
+            <div class="blog-post-info">
+                <div class="author align-items-center mb-1">
+                    <a href="#">Johnson smith</a> in <a href="#url">Traversal</a>
+                </div>
+                <ul class="blog-meta">
+                    <li class="meta-item blog-lesson">
+                        <span class="meta-value"> June 13, 2020 </span>
+                    </li>
+                    <li class="meta-item blog-students">
+                        <span class="meta-value"> 6min read</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="blog-post-main w3l-homeblock1">
+    <div class="blog-content-inf pb-5">
+        <div class="container pb-lg-4">
+            <div class="single-post-image">
+                <div class="post-content text-center">
+                    <img src="@Model.DestinationImage" class="radius-image img-fluid mb-5" alt="" />
+                </div>
+            </div>
+            <div class="single-post-content">
+                
+                <!-- BLOG DETAIL     -->
+                <div class="single-post-content">
+                    @Html.Raw(Model.DestinationDescription)
+                </div>
+
+                <!-- TAG LİST -->
+                <div class="d-grid left-right mt-5 pb-md-5">
+                    <div class="buttons-singles tags">
+                        <h4>Tags :</h4>
+                        <a href="#blog-tag">Travel</a>
+                        <a href="#blog-tag">Culture</a>
+                        <a href="#blog-tag">Hotel</a>
+                        <a href="#blog-tag">Food</a>
+                    </div>
+                    @* <div class="buttons-singles">
+                        <h4>Share :</h4>
+                        <a href="#blog-share"><span class="fa fa-facebook" aria-hidden="true"></span></a>
+                        <a href="#blog-share"><span class="fa fa-twitter" aria-hidden="true"></span></a>
+                        <a href="#blog-share"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
+                        <a href="#blog-share"><span class="fa fa-pinterest-p" aria-hidden=" true"></span></a>
+                    </div> *@
+                </div>
+
+                <!-- YAZAR KARTI -->
+                @* <div class="author-card mt-5">
+                    <div class="row align-items-center">
+                        <div class="col-sm-3 col-6">
+                            <div>
+                                <img src="/Template/images/c3.jpg" alt="" class="rounded-circle img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-sm-9 mt-sm-0 mt-3">
+                            <h3 class="mb-3 title">Alexander Ronald</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, sed et excepturi.
+                                Distinctio fugit odit? Fugit ipsam. Lorem ipsum dolor sit.
+                            </p>
+                            <ul class="author-icons mt-4">
+                                <li><a class="facebook" href="#url"><span class="fa fa-facebook"
+                                            aria-hidden="true"></span></a> </li>
+                                <li><a class="twitter" href="#url"><span class="fa fa-twitter"
+                                            aria-hidden="true"></span></a></li>
+                                <li><a class="google" href="#url"><span class="fa fa-google-plus"
+                                            aria-hidden="true"></span></a></li>
+                                <li><a class="linkedin" href="#url"><span class="fa fa-linkedin"
+                                            aria-hidden="true"></span></a></li>
+                                <li><a class="github" href="#url"><span class="fa fa-github"
+                                            aria-hidden="true"></span></a>
+                                </li>
+                                <li><a class="dribbble" href="#url"><span class="fa fa-dribbble"
+                                            aria-hidden="true"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> *@
+                
+                <!-- COMMENT -->
+                @if (Model.Comments.Count() > 0)
+                {
+                    <div class="comments mt-5">
+                        <h4 class="side-title" id="comments">Yorumlar (@Model.Comments.Count())</h4>
+
+                        @foreach (var comment in Model.Comments)
+                        {
+                            <div class="media mt-4">
+                                <div class="img-circle">
+                                    <img src="/Template/images/c1.jpg" class="img-fluid" alt="...">
+                                </div>
+                                <div class="media-body">
+
+                                    <ul class="time-rply mb-2">
+                                        <li><a href="#URL" class="name mt-0 mb-2 d-block">@comment.CommentFullname</a>@comment.CommentDate.ToString("dd MMM yyyy hh:mm")</li>
+                                    </ul>
+                                    <p>@comment.CommentContent</p>
+                                </div>
+                            </div>
+                        }
+                        
+                    </div>
+                }
+
+                <!-- COMMENT FORM -->
+                <div class="leave-comment-form mt-5" id="reply">
+                    <h4 class="side-title mb-2">Yeni bir yorum yazın</h4>
+                    <form method="post">
+                        <div class="form-group">
+                            <textarea id="commentContent" name="CommentContent" class="form-control" placeholder="Yorum*" required=""
+                                spellcheck="false"></textarea>
+                        </div>
+                        <div class="input-grids row">
+                            <div class="form-group col-lg-6">
+                                <input id="commentFullname" type="text" name="CommentFullname" class="form-control" placeholder="Ad Soyad*" required="">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <input id="commentEmail" type="email" name="CommentEmail" class="form-control" placeholder="Email*" required="">
+                            </div>
+                        </div>
+                        <div class="submit text-right">
+                            <button id="commentButton" type="button" class="btn btn-style btn-primary">Gönder</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

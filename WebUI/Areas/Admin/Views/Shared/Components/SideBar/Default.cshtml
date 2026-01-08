@@ -1,0 +1,153 @@
+
+
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo justify-content-center">
+        <a href="#" class="app-brand-link" style="font-size: 20px;">ADMİN</a>
+    </div>
+    <ul class="menu-inner py-1">
+        <li class="menu-item">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="menu-link" target="_blank">
+                <i class="fa-solid fa-chevron-left"></i>
+                <div class="mx-3">Siteye Dön</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.dashboardActive">
+            <a asp-area="Admin" asp-controller="Admin" asp-action="Index" class="menu-link">
+                <i class="fa-solid fa-house"></i>
+                <div class="mx-3">Dashboard</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.aboutActive">
+            <a asp-area="Admin" asp-controller="About" asp-action="AboutList" class="menu-link">
+                <i class="fa-solid fa-address-card"></i>
+                <div class="mx-3">Hakkımızda</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.sliderActive">
+            <a asp-area="Admin" asp-controller="Slider" asp-action="SliderList" class="menu-link">
+                <i class="fa-solid fa-boxes-stacked"></i>
+                <div class="mx-3">Slider</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.bannerActive">
+            <a asp-area="Admin" asp-controller="Banner" asp-action="BannerList" class="menu-link">
+                <i class="fa-solid fa-box"></i>
+                <div class="mx-3">Banner</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.testimonialActive">
+            <a asp-area="Admin" asp-controller="Testimonial" asp-action="TestimonialList" class="menu-link">
+                <i class="fa-solid fa-comments"></i>
+                <div class="mx-3">Deneyimleyenler</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.accountUOfWorkActive">
+            <a asp-area="Admin" asp-controller="AccountUOfWork" asp-action="Index" class="menu-link">
+                <i class="fa-solid fa-money-bill"></i>
+                <div class="mx-3">Eft-Havale Uygulaması (UOfWork)</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.destinationActive">
+            <a asp-area="Admin" asp-controller="Destination" asp-action="DestinationList" class="menu-link">
+                <i class="fa-solid fa-globe"></i>
+                <div class="mx-3">Turlar</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.destinationCQRSActive">
+            <a asp-area="Admin" asp-controller="DestinationCQRS" asp-action="DestinationCQRSList" class="menu-link">
+                <i class="fa-solid fa-globe"></i>
+                <div class="mx-3">Turlar (CQRS)</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.teamActive">
+            <a asp-area="Admin" asp-controller="Team" asp-action="TeamList" class="menu-link">
+                <i class="fa-solid fa-people-group"></i>
+                <div class="mx-3">Rehberler</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.teamMediatRActive">
+            <a asp-area="Admin" asp-controller="TeamMediatR" asp-action="TeamMediatRList" class="menu-link">
+                <i class="fa-solid fa-people-group"></i>
+                <div class="mx-3">Rehberler (MEDIATR)</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.roomActive">
+            <a asp-area="Admin" asp-controller="Room" asp-action="Index" class="menu-link">
+                <i class="fa-regular fa-square"></i>
+                <div class="mx-3">Odalar (AJAX)</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.userActive">
+            <a asp-area="Admin" asp-controller="User" asp-action="UserList" class="menu-link">
+                <i class="fa-solid fa-users"></i>
+                <div class="mx-3">Kullanıcılar</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.roleActive">
+            <a asp-area="Admin" asp-controller="Role" asp-action="RoleList" class="menu-link">
+                <i class="fa-solid fa-masks-theater"></i>
+                <div class="mx-3">Roller</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.commentActive">
+            <a asp-area="Admin" asp-controller="Comment" asp-action="CommentList" class="menu-link">
+                <i class="fa-solid fa-comment"></i>
+                <div class="mx-3">Yorumlar</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.newsletterActive">
+            <a asp-area="Admin" asp-controller="Newsletter" asp-action="NewsletterList" class="menu-link">
+                <i class="fa-regular fa-envelope"></i>
+                <div class="mx-3">Mail Bülteni</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.downloadActive">
+            <a asp-area="Admin" asp-controller="Download" asp-action="Index" class="menu-link">
+                <i class="fa-solid fa-download"></i>
+                <div class="mx-3">İndirmeler</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.mailActive">
+            <a asp-area="Admin" asp-controller="Mail" asp-action="MailCreate" class="menu-link">
+                <i class="fa-solid fa-envelopes-bulk"></i>
+                <div class="mx-3">Mail</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.visitorActive">
+            <a asp-area="Admin" asp-controller="Visitor" asp-action="VisitorList" class="menu-link">
+                <i class="fa-solid fa-eye"></i>
+                <div class="mx-3">Ziyaretçiler</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.announcementActive">
+            <a asp-area="Admin" asp-controller="Announcement" asp-action="AnnouncementList" class="menu-link">
+                <i class="fa-solid fa-flag"></i>
+                <div class="mx-3">Duyurular</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.messageActive">
+            <a asp-area="Admin" asp-controller="Message" asp-action="MessageList" class="menu-link">
+                <i class="fa-solid fa-message"></i>
+                <div class="mx-3">Mesajlar</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.addressActive">
+            <a asp-area="Admin" asp-controller="Address" asp-action="AddressList" class="menu-link">
+                <i class="fa-solid fa-address-book"></i>
+                <div class="mx-3">Adres</div>
+            </a>
+        </li>
+        <li class="menu-item @ViewBag.rapidApiActive">
+            <a asp-area="Admin" asp-controller="RapidApiMovie" asp-action="Index" class="menu-link">
+                <i class="fa-solid fa-r"></i>
+                <div class="mx-3">Rapid Api</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a asp-area="" asp-controller="User" asp-action="UserLogout" class="menu-link">
+                <i class="fa-solid fa-arrow-right-from-bracket fa-flip-horizontal"></i>
+                <div class="mx-3">Çıkış Yap</div>
+            </a>
+        </li>
+    </ul>
+</aside>
