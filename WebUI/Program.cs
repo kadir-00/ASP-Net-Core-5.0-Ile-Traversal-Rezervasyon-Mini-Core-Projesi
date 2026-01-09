@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using WebUI.CQRS.Handlers.DestinationHandler;
 using Microsoft.EntityFrameworkCore;
+using WebUI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -126,6 +127,9 @@ builder.Services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat
 
 
 var app = builder.Build();
+
+// Seed Database
+DataSeeding.Seed(app);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

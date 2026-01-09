@@ -1,5 +1,9 @@
 @model List<Testimonial>
 
+@if (Model != null)
+
+{
+
     <section class="w3l-clients" id="clients">
         <div class="cusrtomer-layout py-5">
             <div class="container py-lg-4 py-md-3 pb-lg-0">
@@ -11,6 +15,7 @@
                     <div id="owl-demo1" class="owl-two owl-carousel owl-theme">
 
                         @foreach (var item in Model)
+
                         {
                             <div class="item">
                                 <div class="testimonial-content">
@@ -20,11 +25,12 @@
                                             @item.TestimonialComment
                                         </blockquote>
                                         <div class="testi-des">
-                                            <div class="test-img"><img src="@item.TestimonialImage" class="img-fluid" alt="client-img">
+                                            <div class="test-img"><img src="@item.TestimonialImage" class="img-fluid"
+                                                    alt="client-img">
                                             </div>
                                             <div class="peopl align-self">
-                                            <h3>@item.TestimonialFullname</h3>
-                                            <p class="indentity">Example City</p>
+                                                <h3>@item.TestimonialFullname</h3>
+                                                <p class="indentity">Example City</p>
                                             </div>
                                         </div>
                                     </div>
@@ -37,3 +43,12 @@
             </div>
         </div>
     </section>
+}
+
+else
+
+{
+    <div class="container">
+        <div class="alert alert-warning">Referans yorumları bulunamadı.</div>
+    </div>
+}

@@ -1,47 +1,59 @@
 @model About
 
-<!-- about breadcrumb -->
-<section class="w3l-about-breadcrumb text-left">
-    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
-        <div class="container py-2">
-            <h2 class="title">Hakkımızda</h2>
-            <ul class="breadcrumbs-custom-path mt-2">
-                <li><a asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
-                <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Hakkımızda </li>
-            </ul>
-        </div>
-    </div>
-</section>
+@if (Model != null)
 
-<!-- about -->
-<section class="w3l-cta4 py-5">
-    <div class="container py-lg-5">
-        <div class="ab-section text-center">
-            <h6 class="sub-title">Hakkımızda</h6>
-            <h3 class="hny-title">@Model.AboutTitle</h3>
-            <p class="py-3 mb-3">@Model.AboutDescription</p>
-            <a href="#" class="btn btn-style btn-primary">Daha Fazla</a>
-        </div>
-        <div class="row mt-5">
-            <div class="col-md-9 mx-auto">
-                <img src="@Model.AboutImage" class="img-fluid" alt="">
+{
+    <!-- about breadcrumb -->
+    <section class="w3l-about-breadcrumb text-left">
+        <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+            <div class="container py-2">
+                <h2 class="title">Hakkımızda</h2>
+                <ul class="breadcrumbs-custom-path mt-2">
+                    <li><a asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
+                    <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Hakkımızda </li>
+                </ul>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-   <!-- /content-6-->
-   <section class="w3l-content-6 py-5 mb-4">
-    <div class="container py-lg-5">
-      <div class="row">
-        <div class="col-lg-6 content-6-left pr-lg-5">
-          <h6 class="sub-title">Neler Yaparız ?</h6>
-          <h3 class="hny-title">@Model.AboutTitle2</h3>
+    <!-- about -->
+    <section class="w3l-cta4 py-5">
+        <div class="container py-lg-5">
+            <div class="ab-section text-center">
+                <h6 class="sub-title">Hakkımızda</h6>
+                <h3 class="hny-title">@Model.AboutTitle</h3>
+                <p class="py-3 mb-3">@Model.AboutDescription</p>
+                <a href="#" class="btn btn-style btn-primary">Daha Fazla</a>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-9 mx-auto">
+                    <img src="@Model.AboutImage" class="img-fluid" alt="">
+                </div>
+            </div>
         </div>
-        <div class="col-lg-6 content-6-right mt-lg-0 mt-4">
-          <p class="mb-3">@Model.AboutDescription2</p>
-              <a href="#" class="btn btn-style btn-primary mt-4">Daha Fazla</a>
+    </section>
+
+    <!-- /content-6-->
+    <section class="w3l-content-6 py-5 mb-4">
+        <div class="container py-lg-5">
+            <div class="row">
+                <div class="col-lg-6 content-6-left pr-lg-5">
+                    <h6 class="sub-title">Neler Yaparız ?</h6>
+                    <h3 class="hny-title">@Model.AboutTitle2</h3>
+                </div>
+                <div class="col-lg-6 content-6-right mt-lg-0 mt-4">
+                    <p class="mb-3">@Model.AboutDescription2</p>
+                    <a href="#" class="btn btn-style btn-primary mt-4">Daha Fazla</a>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
+}
+
+else
+
+{
+    <div class="container py-5">
+        <div class="alert alert-warning">Hakkımızda verisi bulunamadı.</div>
     </div>
-</section>
+}
