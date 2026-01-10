@@ -28,14 +28,21 @@ namespace WebUI.Areas.Admin.Controllers
                     { "x-rapidapi-host", "imdb-top-100-movies.p.rapidapi.com" },
                 },
             };
-            using (var response = await client.SendAsync(request))
+            List<RapidApiMovieListDTO> model = new List<RapidApiMovieListDTO>();
+            try
             {
-                response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadAsStringAsync();
-                var model = JsonConvert.DeserializeObject<List<RapidApiMovieListDTO>>(body);
-                Console.WriteLine(body);
-                return View(model);
+                using (var response = await client.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    var body = await response.Content.ReadAsStringAsync();
+                    model = JsonConvert.DeserializeObject<List<RapidApiMovieListDTO>>(body);
+                }
             }
+            catch (Exception)
+            {
+                // API hatası olduğunda boş model ile devam et
+            }
+            return View(model);
         }
     }
 }

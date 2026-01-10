@@ -3,10 +3,12 @@ using Dto.DTOs.MessageDTOs;
 using Dto.DTOs.NewsletterDTOs;
 using Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 
 namespace WebUI.Controllers
 {
+    [AllowAnonymous]
     public class ContactController : Controller
     {
         private readonly IMessageService _messageService;

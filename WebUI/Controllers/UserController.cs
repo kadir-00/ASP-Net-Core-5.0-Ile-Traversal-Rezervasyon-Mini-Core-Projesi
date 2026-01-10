@@ -2,11 +2,13 @@ using Entity.Concrete;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using MimeKit;
 using WebUI.Models;
 
 namespace WebUI.Controllers
 {
+    [AllowAnonymous]
     public class UserController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -48,11 +50,13 @@ namespace WebUI.Controllers
                     if (model.IsLoginPageDirect)
                     {
                         return RedirectToAction("UserLogin", "User");
-                    } else
-                    {
-                        return RedirectToAction("UserList", "User", new { Area = "Admin"});
                     }
-                } else
+                    else
+                    {
+                        return RedirectToAction("UserList", "User", new { Area = "Admin" });
+                    }
+                }
+                else
                 {
                     foreach (var item in result.Errors)
                     {
@@ -66,7 +70,8 @@ namespace WebUI.Controllers
         [HttpGet]
         public IActionResult UserLogin(string ReturnUrl = null)
         {
-            var model = new UserLoginModel(){
+            var model = new UserLoginModel()
+            {
                 ReturnUrl = ReturnUrl
             };
             return View(model);
@@ -86,7 +91,8 @@ namespace WebUI.Controllers
                         TempData["icon"] = "success";
                         TempData["text"] = "Giriş yapıldı.";
                         return Redirect(model.ReturnUrl ?? "~/");
-                    } else
+                    }
+                    else
                     {
                         ModelState.AddModelError("", "Bir sorun oluştu, lütfen tekrar deneyin.");
                         return View(model);
@@ -95,7 +101,7 @@ namespace WebUI.Controllers
             }
             return View(model);
         }
-    
+
         public async Task<IActionResult> UserLogout()
         {
             await _signInManager.SignOutAsync();
@@ -162,7 +168,7 @@ namespace WebUI.Controllers
                 }
             }
             return View(model);
-        }   
+        }
 
         [HttpGet]
         public IActionResult UserSifreYenile(string userId, string token)
@@ -189,7 +195,8 @@ namespace WebUI.Controllers
                         TempData["icon"] = "success";
                         TempData["text"] = "Şifreniz güncellendi.";
                         return RedirectToAction("UserLogin", "User");
-                    } else
+                    }
+                    else
                     {
                         TempData["icon"] = "error";
                         TempData["text"] = "Bir hata oluştu. Lütfen gelen linke yeniden tıklayın ya da yeni bir link daha alın.";

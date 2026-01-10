@@ -1,9 +1,11 @@
 using Business.Abstract;
 using Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebUI.Controllers
 {
+    [AllowAnonymous]
     public class DestinationController : Controller
     {
         private readonly IDestinationService _destinationService;
@@ -11,7 +13,7 @@ namespace WebUI.Controllers
         {
             _destinationService = destinationService;
         }
-        
+
         [HttpGet]
         public IActionResult Index(string search)
         {

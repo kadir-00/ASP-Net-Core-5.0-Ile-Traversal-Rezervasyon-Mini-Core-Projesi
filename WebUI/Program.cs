@@ -1,4 +1,6 @@
 using System.Reflection;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Business.Container;
 using Data.Concrete;
 using Entity.Concrete;
@@ -58,13 +60,13 @@ builder.Services.CustomerValidator();
 // DTO VALIDATOR - FINISH ------------------------------------------------------------
 
 // PROJE SEVİYESİNDE AUTHORİZE - START --------------------------------------------------------------------------------
-// builder.Services.AddMvc(config => 
-// {
-//     var policy = new AuthorizationPolicyBuilder()
-//     .RequireAuthenticatedUser()
-//     .Build();
-//     config.Filters.Add(new AuthorizeFilter(policy));
-// });
+builder.Services.AddMvc(config =>
+{
+    var policy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+    config.Filters.Add(new AuthorizeFilter(policy));
+});
 // PROJE SEVİYESİNDE AUTHORİZE - FINISH -------------------------------------------------------------------------------
 
 // IDENTITY - START ----------------------------------------------------------------
