@@ -92,6 +92,68 @@ namespace WebUI.Models
                     context.SaveChanges();
                 }
 
+                if (!context.Destinations.Any(x => x.DestinationCity == "Kapadokya"))
+                {
+                    context.Destinations.AddRange(
+                        new Destination
+                        {
+                            DestinationCity = "Kapadokya",
+                            DestinationDayNight = "3 Gün 4 Gece",
+                            DestinationPrice = 900,
+                            DestinationImage = "/Template/images/g5.jpg",
+                            DestinationDescription = "Peribacalarının büyüleyici atmosferinde balon turu.",
+                            DestinationSubTitle = "Masallar Diyarı",
+                            DestinationStatus = true,
+                            DestinationCapacity = 45
+                        },
+                        new Destination
+                        {
+                            DestinationCity = "Tokyo",
+                            DestinationDayNight = "6 Gün 7 Gece",
+                            DestinationPrice = 2500,
+                            DestinationImage = "/Template/images/g6.jpg",
+                            DestinationDescription = "Teknoloji ve geleneğin muhteşem uyumu.",
+                            DestinationSubTitle = "Uzak Doğu'nun Kalbi",
+                            DestinationStatus = true,
+                            DestinationCapacity = 30
+                        },
+                        new Destination
+                        {
+                            DestinationCity = "New York",
+                            DestinationDayNight = "5 Gün 6 Gece",
+                            DestinationPrice = 2200,
+                            DestinationImage = "/Template/images/g7.jpg",
+                            DestinationDescription = "Hiç uyumayan şehirde unutulmaz bir macera.",
+                            DestinationSubTitle = "Özgürlük Şehri",
+                            DestinationStatus = true,
+                            DestinationCapacity = 40
+                        },
+                         new Destination
+                         {
+                             DestinationCity = "Dubai",
+                             DestinationDayNight = "4 Gün 5 Gece",
+                             DestinationPrice = 1800,
+                             DestinationImage = "/Template/images/g8.jpg",
+                             DestinationDescription = "Lüks ve ihtişamın çölle buluştuğu nokta.",
+                             DestinationSubTitle = "Geleceğin Şehri",
+                             DestinationStatus = true,
+                             DestinationCapacity = 50
+                         },
+                        new Destination
+                        {
+                            DestinationCity = "Barselona",
+                            DestinationDayNight = "4 Gün 5 Gece",
+                            DestinationPrice = 1400,
+                            DestinationImage = "/Template/images/g9.jpg",
+                            DestinationDescription = "Gaudi'nin eserleriyle dolu renkli bir Akdeniz rüyası.",
+                            DestinationSubTitle = "İspanya'nın İncisi",
+                            DestinationStatus = true,
+                            DestinationCapacity = 60
+                        }
+                    );
+                    context.SaveChanges();
+                }
+
                 if (!context.Banners.Any())
                 {
                     context.Banners.Add(new Banner
@@ -141,6 +203,41 @@ namespace WebUI.Models
                     context.SaveChanges();
                 }
 
+
+                if (!context.Teams.Any())
+                {
+                    context.Teams.AddRange(
+                        new Team
+                        {
+                            TeamFullname = "Elif Kaya",
+                            TeamDescription = "Kültür turları uzmanı, 5 yıllık deneyim.",
+                            TeamImage = "/Template/images/team4.jpg",
+                            TeamTwitterUrl = "https://twitter.com/elifkaya",
+                            TeamInstagramUrl = "https://instagram.com/elifkaya",
+                            TeamStatus = true
+                        },
+                        new Team
+                        {
+                            TeamFullname = "Can Yıldız",
+                            TeamDescription = "Doğa ve macera turları rehberi.",
+                            TeamImage = "/Template/images/team5.jpg",
+                            TeamTwitterUrl = "https://twitter.com/canyildiz",
+                            TeamInstagramUrl = "https://instagram.com/canyildiz",
+                            TeamStatus = true
+                        },
+                          new Team
+                          {
+                              TeamFullname = "Zeynep Çelik",
+                              TeamDescription = "Tarih ve sanat tarihi uzmanı.",
+                              TeamImage = "/Template/images/team1.jpg", // Reusing existing image if needed or placeholder
+                              TeamTwitterUrl = "https://twitter.com/zeynepcelik",
+                              TeamInstagramUrl = "https://instagram.com/zeynepcelik",
+                              TeamStatus = true
+                          }
+                    );
+                    context.SaveChanges();
+                }
+
                 if (!context.Rooms.Any())
                 {
                     context.Rooms.AddRange(
@@ -168,6 +265,19 @@ namespace WebUI.Models
                             RoomSubTitle = "Geniş aileler için ideal.",
                             RoomImage = "/Template/images/c4.jpg"
                         }
+                    );
+                    context.SaveChanges();
+                }
+
+                if (!context.Newsletters.Any())
+                {
+                    context.Newsletters.AddRange(
+                        new Newsletter { NewsletterMail = "kadir@gmail.com", NewsletterDate = DateTime.Now.AddDays(-10) },
+                        new Newsletter { NewsletterMail = "mehmet@gmail.com", NewsletterDate = DateTime.Now.AddDays(-5) },
+                        new Newsletter { NewsletterMail = "ayse@hotmail.com", NewsletterDate = DateTime.Now.AddDays(-2) },
+                        new Newsletter { NewsletterMail = "fatma@outlook.com", NewsletterDate = DateTime.Now.AddDays(-1) },
+                        new Newsletter { NewsletterMail = "ali@yahoo.com", NewsletterDate = DateTime.Now.AddDays(-20) },
+                        new Newsletter { NewsletterMail = "test@test.com", NewsletterDate = DateTime.Now }
                     );
                     context.SaveChanges();
                 }

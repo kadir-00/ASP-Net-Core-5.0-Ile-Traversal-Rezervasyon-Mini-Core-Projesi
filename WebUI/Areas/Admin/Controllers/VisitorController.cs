@@ -25,19 +25,24 @@ namespace WebUI.Areas.Admin.Controllers
         {
             ViewBag.visitorActive = "active";
 
-            // Client oluşturduk
             var client = _httpClientFactory.CreateClient();
-
-            // Client'a, işlem yapmak istediğimiz api adresini gönderdik.
-            var responseMessage = await client.GetAsync("https://localhost:7253/api/Visitor");
-
-            if (responseMessage.IsSuccessStatusCode)
+            try
             {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<VisitorListDTO>>(jsonData);
-                return View(values);
+                var responseMessage = await client.GetAsync("https://localhost:7253/api/Visitor");
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                    var values = JsonConvert.DeserializeObject<List<VisitorListDTO>>(jsonData);
+                    return View(values);
+                }
             }
-            return View();
+            catch (Exception)
+            {
+                // API likely down
+                ViewBag.Error = "API bağlantısı kurulamadı.";
+                return View(new List<VisitorListDTO>());
+            }
+            return View(new List<VisitorListDTO>());
         }
 
         [HttpGet]
