@@ -1,0 +1,50 @@
+@using Entity.Concrete
+@model Reservation
+@{
+    ViewData["Title"] = "ReservationCreate";
+    Layout = "~/Areas/Member/Views/Shared/_LayoutMember.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h6>Yeni Rezervasyon Oluştur</h6>
+                    <hr />
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <label>Lokasyon Seçin</label>
+                            @if (ViewBag.destinations != null)
+                            {
+                                <select class="form-control" name="DestinationId">
+                                    <option value="">Lütfen Şehir Seçiniz</option>
+                                    @foreach (var item in (List<Destination>)ViewBag.destinations)
+                                    {
+                                        <option value="@item.DestinationId">@item.DestinationCity</option>
+                                    }
+                                </select>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <label>Kişi Sayısı</label>
+                            <input type="text" asp-for="ReservationPersonCount" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>Tarih</label>
+                            <input type="date" asp-for="ReservationDate" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>Varsa Eklemek İstedikleriniz</label>
+                            <textarea asp-for="ReservationDescription" class="form-control" rows="4"></textarea>
+                        </div>
+                        <br />
+                        <button class="btn btn-outline-primary">Rezervasyon Yap</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
