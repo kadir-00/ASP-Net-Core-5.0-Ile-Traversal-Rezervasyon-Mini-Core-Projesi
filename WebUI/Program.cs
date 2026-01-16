@@ -14,7 +14,7 @@ using WebUI.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddFluentValidation(); // Business katmanındaki validasyonların WebUI katmanına yansıması için AddFluentValidation() metodu eklenmesi gerekiyor.
+builder.Services.AddControllersWithViews().AddFluentValidation().AddRazorRuntimeCompilation(); // Business katmanındaki validasyonların WebUI katmanına yansıması için AddFluentValidation() metodu eklenmesi gerekiyor.
 
 // CQRS CONFIGURATION - START ---------------------------------------------------------
 builder.Services.AddScoped<GetAllDestinationQueryHandler>();
