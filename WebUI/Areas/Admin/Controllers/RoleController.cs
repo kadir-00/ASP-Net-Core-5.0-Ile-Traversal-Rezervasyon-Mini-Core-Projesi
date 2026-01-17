@@ -11,7 +11,7 @@ using WebUI.Areas.Admin.Models;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         private readonly RoleManager<AppRole> _roleManager;
@@ -49,7 +49,8 @@ namespace WebUI.Areas.Admin.Controllers
                     TempData["icon"] = "success";
                     TempData["text"] = "İşlem başarılı.";
                     return RedirectToAction("RoleList", "Role");
-                } else
+                }
+                else
                 {
                     foreach (var item in result.Errors)
                     {
@@ -85,7 +86,8 @@ namespace WebUI.Areas.Admin.Controllers
                     TempData["icon"] = "success";
                     TempData["text"] = "İşlem başarılı.";
                     return RedirectToAction("RoleList", "Role");
-                } else
+                }
+                else
                 {
                     foreach (var item in result.Errors)
                     {

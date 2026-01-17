@@ -8,7 +8,7 @@ using WebUI.Areas.Admin.Models;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
         private readonly IAppUserService _appUserService;
@@ -50,15 +50,13 @@ namespace WebUI.Areas.Admin.Controllers
                 UserName = user.UserName,
                 PhoneNumber = user.PhoneNumber,
                 City = user.City,
-                Email = user.Email,
-                SeciliRoller = await _userManager.GetRolesAsync(user),
-                TumRoller = _roleManager.Roles.Select(i => i.Name)
+                Email = user.Email
             };
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> UserUpdate(UserUpdateModel model, string[] seciliRoller)
+        public async Task<IActionResult> UserUpdate(UserUpdateModel model)
         {
             var user = await _userManager.FindByIdAsync(model.Id.ToString());
             if (ModelState.IsValid)
@@ -72,15 +70,11 @@ namespace WebUI.Areas.Admin.Controllers
                 var result = await _userManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {
-                    var userRoles = await _userManager.GetRolesAsync(user);
-                    seciliRoller = seciliRoller ?? new string[]{};
-                    await _userManager.AddToRolesAsync(user, seciliRoller.Except(userRoles).ToArray<string>());
-                    await _userManager.RemoveFromRolesAsync(user, userRoles.Except(seciliRoller).ToArray<string>());
-                    
                     TempData["icon"] = "success";
                     TempData["text"] = "İşlem başarılı.";
                     return RedirectToAction("UserUpdate", "User", new { Area = "Admin", id = model.Id });
-                } else
+                }
+                else
                 {
                     foreach (var item in result.Errors)
                     {
@@ -89,6 +83,47 @@ namespace WebUI.Areas.Admin.Controllers
                 }
             }
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AssignRole(int id)
+        {
+            ViewBag.userActive = "active";
+            var user = _appUserService.GetById(id);
+            TempData["UserId"] = user.Id;
+            var roles = _roleManager.Roles.ToList();
+            var userRoles = await _userManager.GetRolesAsync(user);
+            List<RoleAssignViewModel> roleAssignViewModels = new List<RoleAssignViewModel>();
+            foreach (var item in roles)
+            {
+                RoleAssignViewModel model = new RoleAssignViewModel();
+                model.RoleId = item.Id;
+                model.RoleName = item.Name;
+                model.RoleExist = userRoles.Contains(item.Name);
+                roleAssignViewModels.Add(model);
+            }
+            return View(roleAssignViewModels);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AssignRole(List<RoleAssignViewModel> model)
+        {
+            var userId = (int)TempData["UserId"];
+            var user = _appUserService.GetById(userId);
+            foreach (var item in model)
+            {
+                if (item.RoleExist)
+                {
+                    await _userManager.AddToRoleAsync(user, item.RoleName);
+                }
+                else
+                {
+                    await _userManager.RemoveFromRoleAsync(user, item.RoleName);
+                }
+            }
+            TempData["icon"] = "success";
+            TempData["text"] = "Roller güncellendi.";
+            return RedirectToAction("UserList");
         }
 
         public IActionResult UserDelete(int id)

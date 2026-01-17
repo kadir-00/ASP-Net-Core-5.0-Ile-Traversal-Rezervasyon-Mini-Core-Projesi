@@ -12,7 +12,7 @@ namespace WebUI.Areas.Admin.Controllers
 {
     // API ------------------------------------------------------------------------------------------------------------
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class VisitorController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;

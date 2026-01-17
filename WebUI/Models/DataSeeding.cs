@@ -1,6 +1,7 @@
 using Data.Concrete;
 using Entity.Concrete;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebUI.Models
 {
@@ -280,6 +281,39 @@ namespace WebUI.Models
                         new Newsletter { NewsletterMail = "test@test.com", NewsletterDate = DateTime.Now }
                     );
                     context.SaveChanges();
+                }
+                // ROLE SEEDING
+                var roleManager = scope.ServiceProvider.GetService<RoleManager<AppRole>>();
+                var userManager = scope.ServiceProvider.GetService<UserManager<AppUser>>();
+
+                string[] roleNames = { "Admin", "Member", "Visitor" };
+
+                foreach (var roleName in roleNames)
+                {
+                    var roleExist = roleManager.RoleExistsAsync(roleName).Result;
+                    if (!roleExist)
+                    {
+                        roleManager.CreateAsync(new AppRole { Name = roleName }).Wait();
+                    }
+                }
+
+                // DEFAULT ADMIN USER SEEDING
+                if (userManager.Users.All(u => u.UserName != "admin"))
+                {
+                    var adminUser = new AppUser
+                    {
+                        UserName = "admin",
+                        Email = "admin@traversal.com",
+                        Name = "Admin",
+                        Surname = "User",
+                        City = "Istanbul"
+                    };
+
+                    var result = userManager.CreateAsync(adminUser, "Admin123!").Result;
+                    if (result.Succeeded)
+                    {
+                        userManager.AddToRoleAsync(adminUser, "Admin").Wait();
+                    }
                 }
             }
         }

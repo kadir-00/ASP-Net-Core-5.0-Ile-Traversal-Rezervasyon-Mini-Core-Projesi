@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class MessageController : Controller
     {
         private readonly IMessageService _messageService;

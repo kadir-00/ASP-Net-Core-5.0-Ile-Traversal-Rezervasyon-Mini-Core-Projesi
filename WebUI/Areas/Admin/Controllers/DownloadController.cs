@@ -12,7 +12,7 @@ using OfficeOpenXml;
 namespace WebUI.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class DownloadController : Controller
     {
         private readonly IDestinationService _destinationService;
@@ -30,7 +30,7 @@ namespace WebUI.Controllers
             ViewBag.downloadActive = "active";
             return View();
         }
-        
+
         public IActionResult ExelPage()
         {
             // eklenen nuget : dotnet add package EPPlus --version 7.2.0 
@@ -45,31 +45,31 @@ namespace WebUI.Controllers
             var workSheet = excel.Workbook.Worksheets.Add("Sayfa1");
 
             // Başlık satırı
-            workSheet.Cells[1,1].Value = "DestinasyonId";
-            workSheet.Cells[1,2].Value = "DestinasyonCity";
-            workSheet.Cells[1,3].Value = "DestinasyonDayNight";
-            workSheet.Cells[1,4].Value = "DestinasyonPrice";
-            workSheet.Cells[1,5].Value = "DestinasyonImage";
-            workSheet.Cells[1,6].Value = "DestinasyonDescription";
-            workSheet.Cells[1,7].Value = "DestinasyonStatus";
-            workSheet.Cells[1,8].Value = "DestinasyonCapacity";
-            workSheet.Cells[1,9].Value = "CommentCount";
-            workSheet.Cells[1,10].Value = "ReservationCount";
+            workSheet.Cells[1, 1].Value = "DestinasyonId";
+            workSheet.Cells[1, 2].Value = "DestinasyonCity";
+            workSheet.Cells[1, 3].Value = "DestinasyonDayNight";
+            workSheet.Cells[1, 4].Value = "DestinasyonPrice";
+            workSheet.Cells[1, 5].Value = "DestinasyonImage";
+            workSheet.Cells[1, 6].Value = "DestinasyonDescription";
+            workSheet.Cells[1, 7].Value = "DestinasyonStatus";
+            workSheet.Cells[1, 8].Value = "DestinasyonCapacity";
+            workSheet.Cells[1, 9].Value = "CommentCount";
+            workSheet.Cells[1, 10].Value = "ReservationCount";
 
             // Alt satırlar
             var row = 2;
             foreach (var destination in destinations)
             {
-                workSheet.Cells[row,1].Value = destination.DestinationId;
-                workSheet.Cells[row,2].Value = destination.DestinationCity;
-                workSheet.Cells[row,3].Value = destination.DestinationDayNight;
-                workSheet.Cells[row,4].Value = destination.DestinationPrice;
-                workSheet.Cells[row,5].Value = destination.DestinationImage;
-                workSheet.Cells[row,6].Value = destination.DestinationDescription;
-                workSheet.Cells[row,7].Value = destination.DestinationStatus;
-                workSheet.Cells[row,8].Value = destination.DestinationCapacity;
-                workSheet.Cells[row,9].Value = destination.Comments.Count();
-                workSheet.Cells[row,10].Value = destination.Reservations.Count();
+                workSheet.Cells[row, 1].Value = destination.DestinationId;
+                workSheet.Cells[row, 2].Value = destination.DestinationCity;
+                workSheet.Cells[row, 3].Value = destination.DestinationDayNight;
+                workSheet.Cells[row, 4].Value = destination.DestinationPrice;
+                workSheet.Cells[row, 5].Value = destination.DestinationImage;
+                workSheet.Cells[row, 6].Value = destination.DestinationDescription;
+                workSheet.Cells[row, 7].Value = destination.DestinationStatus;
+                workSheet.Cells[row, 8].Value = destination.DestinationCapacity;
+                workSheet.Cells[row, 9].Value = destination.Comments.Count();
+                workSheet.Cells[row, 10].Value = destination.Reservations.Count();
                 row++;
             }
 
@@ -87,14 +87,14 @@ namespace WebUI.Controllers
             var teams = _teamService.GetAll();
 
             // 2.ADIM - DOSYA YOLU OLUŞTURMA --------------------------------------------------------------
-                // Dosya yolu oluşturuldu
+            // Dosya yolu oluşturuldu
             string dosyaYolu = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/pdfreports/" + "team.pdf");
-                // Dosya yolu eklendi
+            // Dosya yolu eklendi
             var stream = new FileStream(dosyaYolu, FileMode.Create);
 
-                // Yeni bir document oluşturuldu.
+            // Yeni bir document oluşturuldu.
             Document pdfDoc = new Document();
-                // Document, dosya yolu ile birleştirild.
+            // Document, dosya yolu ile birleştirild.
             PdfWriter.GetInstance(pdfDoc, stream);
 
             // 3.ADIM - VERİ EKLEME --------------------------------------------------------------
@@ -128,7 +128,7 @@ namespace WebUI.Controllers
             byte[] fileBytes = System.IO.File.ReadAllBytes(dosyaYolu);
             return File(fileBytes, "application/pdf", "team.pdf");
         }
-    
+
         public IActionResult ServiceExelPage()
         {
             // Sadece Busines içine excelService ve Manager tanımladık

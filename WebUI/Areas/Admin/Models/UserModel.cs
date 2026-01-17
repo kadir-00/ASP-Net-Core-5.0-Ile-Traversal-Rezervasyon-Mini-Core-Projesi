@@ -22,7 +22,6 @@ namespace WebUI.Areas.Admin.Models
 
         [Required(ErrorMessage = "Zorunlu alan.")]
         public string Email { get; set; }
-        public IEnumerable<string> SeciliRoller { get; set; }
-        public IEnumerable<string> TumRoller { get; set; }
+
     }
 }

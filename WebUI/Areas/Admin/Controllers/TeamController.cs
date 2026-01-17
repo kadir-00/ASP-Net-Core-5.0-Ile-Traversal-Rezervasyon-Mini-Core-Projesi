@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class TeamController : Controller
     {
         private readonly ITeamService _teamService;
@@ -42,7 +42,8 @@ namespace WebUI.Areas.Admin.Controllers
                 TempData["icon"] = "success";
                 TempData["text"] = "İşlem başarılı.";
                 return RedirectToAction("TeamList", "Team");
-            } else
+            }
+            else
             {
                 foreach (var item in result.Errors)
                 {
@@ -72,7 +73,7 @@ namespace WebUI.Areas.Admin.Controllers
         public IActionResult TeamStatus(int id)
         {
             var value = _teamService.GetById(id);
-            value.TeamStatus = value.TeamStatus == true ? false:true;
+            value.TeamStatus = value.TeamStatus == true ? false : true;
             _teamService.Update(value);
             TempData["icon"] = "success";
             TempData["text"] = "İşlem başarılı.";

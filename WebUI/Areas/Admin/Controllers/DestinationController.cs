@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class DestinationController : Controller
     {
         private readonly IDestinationService _destinationService;

@@ -11,7 +11,7 @@ using WebUI.CQRS.Queries.TeamQuery;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class TeamMediatRController : Controller
     {
         private readonly IMediator _mediator;

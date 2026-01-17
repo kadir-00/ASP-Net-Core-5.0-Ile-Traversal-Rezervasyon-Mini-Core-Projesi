@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class RapidApiMovieController : Controller
     {
         public async Task<IActionResult> Index()

@@ -45,6 +45,7 @@ namespace WebUI.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Member");
                     TempData["icon"] = "success";
                     TempData["text"] = "Kullanıcı oluşturuldu.";
                     if (model.IsLoginPageDirect)

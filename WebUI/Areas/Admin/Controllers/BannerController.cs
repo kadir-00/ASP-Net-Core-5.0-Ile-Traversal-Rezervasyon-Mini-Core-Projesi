@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class BannerController : Controller
     {
         private readonly IBannerService _bannerService;
@@ -42,7 +42,8 @@ namespace WebUI.Areas.Admin.Controllers
                 TempData["icon"] = "success";
                 TempData["text"] = "İşlem başarılı.";
                 return RedirectToAction("BannerList", "Banner");
-            } else
+            }
+            else
             {
                 foreach (var item in result.Errors)
                 {

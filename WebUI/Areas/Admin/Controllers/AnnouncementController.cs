@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AnnouncementController : Controller
     {
         private readonly IAnnouncementService _announcementService;
