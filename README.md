@@ -66,20 +66,6 @@ Bu proje, sadece bir web sitesi değil, aynı zamanda ileri seviye bir mimari ç
 | **Real-Time** | SignalR |
 | **Diğer** | Areas, DTOs, Linq |
 
----
-
-## ⚙️ Kurulum (Nasıl Çalıştırılır?)
-
-1.  Projeyi klonlayın:
-    ```bash
-    git clone [https://github.com/KULLANICIADINIZ/TraversalCoreProje.git](https://github.com/KULLANICIADINIZ/TraversalCoreProje.git)
-    ```
-2.  `appsettings.json` dosyasındaki **PostgreSQL** bağlantı dizesini (Connection String) kendi sunucunuza göre düzenleyin.
-3.  Migration işlemlerini uygulayın:
-    ```powershell
-    Update-Database
-    ```
-4.  Projeyi ayağa kaldırın.
 
 ---
 
