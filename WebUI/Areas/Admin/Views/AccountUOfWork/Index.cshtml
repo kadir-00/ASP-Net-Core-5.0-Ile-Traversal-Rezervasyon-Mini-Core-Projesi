@@ -1,6 +1,7 @@
 @model AccountUOfWorkModel
 @{
     ViewData["Title"] = "Index";
+
     Layout = "_LayoutAdmin";
 }
 
@@ -14,11 +15,7 @@
                 </div>
                 <div class="card-body pt-0 p-4">
                     <form asp-area="Admin" asp-controller="AccountUOfWork" asp-action="Index" method="post">
-                        <div class="form-group">
-                            <span class="validation-text" asp-validation-for="SenderId"></span>
-                            <label for="SenderId">Gönderici Id</label>
-                            <input type="text" asp-for="SenderId" id="SenderId" class="form-control">
-                        </div>
+
                         <div class="form-group">
                             <span class="validation-text" asp-validation-for="ReceiverId"></span>
                             <label for="ReceiverId">Alıcı Id</label>
@@ -30,7 +27,8 @@
                             <input type="text" asp-for="Amount" id="Amount" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-outline-primary mt-4">Gönder</button>
-                        <a asp-area="Admin" asp-controller="AccountUOfWork" asp-action="Index" class="btn btn-outline-dark mx-2 mt-4">Geri</a>
+                        <a asp-area="Admin" asp-controller="AccountUOfWork" asp-action="Index"
+                            class="btn btn-outline-dark mx-2 mt-4">Geri</a>
                     </form>
                 </div>
             </div>
