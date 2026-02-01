@@ -126,39 +126,39 @@ namespace WebUI.Controllers
                     var token = await _userManager.GeneratePasswordResetTokenAsync(user);
                     var url = Url.Action("UserSifreYenile", "User", new { userId = user.Id, token = token });
 
-                    // 1- mimeMessage nesnesi türettik
+
                     MimeMessage mimeMessage = new MimeMessage();
 
-                    // 2- Gönderici Adı ve Mail bilgisini aldık
+
                     MailboxAddress mailboxSenderAddress = new MailboxAddress("Traversal", "oguzhan_turan_52@hotmail.com");
 
-                    // mimeMessage içine, kimden gideceği bilgileri eklendi
+
                     mimeMessage.From.Add(mailboxSenderAddress);
 
-                    // 3- Alıcı Adı ve Mail bilgisini aldık
+
                     MailboxAddress mailboxReceiverAddress = new MailboxAddress(user.Name + " " + user.Surname, user.Email);
 
-                    // mimeMessage içine, kime gideceği bilgileri eklendi
+
                     mimeMessage.To.Add(mailboxReceiverAddress);
 
-                    // mail konu bilgisi eklendi
+
                     mimeMessage.Subject = "Şifre Sıfırlama";
-                    // mail içerik eklendi
+
                     var bodyBuilder = new BodyBuilder();
                     bodyBuilder.TextBody = "https://localhost:7180/" + url;
                     mimeMessage.Body = bodyBuilder.ToMessageBody();
 
 
-                    // smtp nesnesi oluşturuldu
+
                     SmtpClient smtpClient = new SmtpClient();
 
-                    // gönderen mail bilgileri girildi. host(smtp.office365.com), port(587), enableSSL(false) bilgileri
+
                     smtpClient.Connect("smtp.office365.com", 587, false);
 
-                    // mail gönderene ait mail ve mail şifre bilgilerini smtpClient'e gönderdik
+
                     smtpClient.Authenticate("oguzhan_turan_52@hotmail.com", "şifreniz");
 
-                    // mimeMessage nesnesini smtpClient'e send ettik
+
                     smtpClient.Send(mimeMessage);
 
                     smtpClient.Disconnect(true);

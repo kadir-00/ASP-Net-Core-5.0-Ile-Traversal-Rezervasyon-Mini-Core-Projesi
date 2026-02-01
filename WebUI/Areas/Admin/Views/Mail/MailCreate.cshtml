@@ -1,6 +1,7 @@
 @model MailRequestModel
 @{
     ViewData["Title"] = "MailCreate";
+
     Layout = "_LayoutAdmin";
 }
 
@@ -18,7 +19,7 @@
                         <div class="form-group">
                             <span class="validation-text" id="validation-text" asp-validation-for="SenderName"></span>
                             <label for="SenderName">Ad Soyad</label>
-                            <input type="text"asp-for="SenderName" id="SenderName" class="form-control">
+                            <input type="text" asp-for="SenderName" id="SenderName" class="form-control">
                         </div>
                         <div class="form-group">
                             <span class="validation-text" asp-validation-for="SenderMail"></span>
@@ -28,7 +29,8 @@
                         <div class="form-group">
                             <span class="validation-text" asp-validation-for="SenderMailPassword"></span>
                             <label for="SenderMailPassword">Şifre</label>
-                            <input type="text" asp-for="SenderMailPassword" id="SenderMailPassword" class="form-control">
+                            <input type="text" asp-for="SenderMailPassword" id="SenderMailPassword"
+                                class="form-control">
                         </div>
                         <div class="form-group">
                             <span class="validation-text" asp-validation-for="SenderMailHost"></span>
@@ -54,7 +56,7 @@
                         <div class="form-group">
                             <span class="validation-text" id="validation-text" asp-validation-for="ReceiverName"></span>
                             <label for="ReceiverName">Ad Soyad</label>
-                            <input type="text"asp-for="ReceiverName" id="ReceiverName" class="form-control">
+                            <input type="text" asp-for="ReceiverName" id="ReceiverName" class="form-control">
                         </div>
                         <div class="form-group">
                             <span class="validation-text" asp-validation-for="ReceiverMail"></span>
@@ -72,7 +74,7 @@
                             <input type="text" asp-for="Body" id="Body" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary mt-4">Gönder</button>
-                        @* <a asp-area="Admin" asp-controller="Team" asp-action="TeamList" class="btn btn-outline-dark mx-2 mt-4">Geri</a> *@
+
                     </form>
                 </div>
             </div>

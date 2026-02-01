@@ -1,48 +1,50 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Dto.DTOs.RapidApiMovieDTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
+using WebUI.Areas.Admin.Models;
 using Newtonsoft.Json;
 
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
     public class RapidApiMovieController : Controller
     {
         public async Task<IActionResult> Index()
         {
-            ViewBag.rapidApiActive = "active";
-
-            var client = new HttpClient();
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri("https://imdb-top-100-movies.p.rapidapi.com/"),
-                Headers =
-                {
-                    { "x-rapidapi-key", "284c37bb44msh75f9c69b5e31064p1cbed5jsnb965f4713f5e" },
-                    { "x-rapidapi-host", "imdb-top-100-movies.p.rapidapi.com" },
-                },
-            };
-            List<RapidApiMovieListDTO> model = new List<RapidApiMovieListDTO>();
+            List<RapidApiMovieViewModel> rapidApiMovies = new List<RapidApiMovieViewModel>();
             try
             {
+                var client = new HttpClient();
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = new Uri("https://imdb-top-100-movies.p.rapidapi.com/"),
+                    Headers =
+                    {
+                        { "x-rapidapi-key", "c8e3a0412amsh928c4ac4714d776p1b2542jsne008c40e5697" },
+                        { "x-rapidapi-host", "imdb-top-100-movies1.p.rapidapi.com" },
+                    },
+                };
                 using (var response = await client.SendAsync(request))
                 {
-                    response.EnsureSuccessStatusCode();
-                    var body = await response.Content.ReadAsStringAsync();
-                    model = JsonConvert.DeserializeObject<List<RapidApiMovieListDTO>>(body);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var body = await response.Content.ReadAsStringAsync();
+                        rapidApiMovies = JsonConvert.DeserializeObject<List<RapidApiMovieViewModel>>(body);
+                    }
+                    else
+                    {
+                        var errorContent = await response.Content.ReadAsStringAsync();
+                        ViewBag.Error = $"API Error: {response.StatusCode} - {errorContent}";
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // API hatası olduğunda boş model ile devam et
+                ViewBag.Error = $"System Error: {ex.Message}";
             }
-            return View(model);
+            return View(rapidApiMovies);
         }
     }
 }

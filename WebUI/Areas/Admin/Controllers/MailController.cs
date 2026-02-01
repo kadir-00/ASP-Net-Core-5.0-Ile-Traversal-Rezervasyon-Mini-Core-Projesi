@@ -11,7 +11,8 @@ using WebUI.Areas.Admin.Models;
 namespace WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
+    // [Authorize(Roles = "Admin")]
     public class MailController : Controller
     {
         [HttpGet]
@@ -24,39 +25,25 @@ namespace WebUI.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult MailCreate(MailRequestModel mailRequestModel)
         {
-            // 1- mimeMessage nesnesi türettik
             MimeMessage mimeMessage = new MimeMessage();
 
-            // 2- Gönderici Adı ve Mail bilgisini aldık
             MailboxAddress mailboxSenderAddress = new MailboxAddress(mailRequestModel.SenderName, mailRequestModel.SenderMail);
-
-            // mimeMessage içine, kimden gideceği bilgileri eklendi
             mimeMessage.From.Add(mailboxSenderAddress);
 
-            // 3- Alıcı Adı ve Mail bilgisini aldık
             MailboxAddress mailboxReceiverAddress = new MailboxAddress(mailRequestModel.ReceiverName, mailRequestModel.ReceiverMail);
-
-            // mimeMessage içine, kime gideceği bilgileri eklendi
             mimeMessage.To.Add(mailboxReceiverAddress);
 
-            // mail konu bilgisi eklendi
             mimeMessage.Subject = mailRequestModel.Subject;
-            // mail içerik eklendi
             var bodyBuilder = new BodyBuilder();
             bodyBuilder.TextBody = mailRequestModel.Body;
             mimeMessage.Body = bodyBuilder.ToMessageBody();
 
-
-            // smtp nesnesi oluşturuldu
             SmtpClient smtpClient = new SmtpClient();
 
-            // gönderen mail bilgileri girildi. host(smtp.office365.com), port(587), enableSSL(false) bilgileri
-            smtpClient.Connect(mailRequestModel.SenderMailHost, mailRequestModel.SenderMailPort, mailRequestModel.SenderMailEnableSSL);
+            smtpClient.Connect(mailRequestModel.SenderMailHost, mailRequestModel.SenderMailPort, MailKit.Security.SecureSocketOptions.StartTls);
 
-            // mail gönderene ait mail ve mail şifre bilgilerini smtpClient'e gönderdik
             smtpClient.Authenticate(mailRequestModel.SenderMail, mailRequestModel.SenderMailPassword);
 
-            // mimeMessage nesnesini smtpClient'e send ettik
             smtpClient.Send(mimeMessage);
 
             smtpClient.Disconnect(true);
@@ -64,6 +51,49 @@ namespace WebUI.Areas.Admin.Controllers
             TempData["icon"] = "success";
             TempData["text"] = "Mail gönderildi.";
             return RedirectToAction("MailCreate", "Mail", new { Area = "Admin" });
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult SendTestMail()
+        {
+            try
+            {
+                MimeMessage mimeMessage = new MimeMessage();
+
+                var senderMail = "traversalcore2@gmail.com";
+                var senderPassword = "btjq vqde dftu irbf";
+                var senderHost = "smtp.gmail.com";
+                var senderPort = 587;
+
+
+                MailboxAddress mailboxSenderAddress = new MailboxAddress("Antigravity Agent", senderMail);
+                mimeMessage.From.Add(mailboxSenderAddress);
+
+                MailboxAddress mailboxReceiverAddress = new MailboxAddress("Kadir", "ukadir231@gmail.com");
+                mimeMessage.To.Add(mailboxReceiverAddress);
+
+                mimeMessage.Subject = "Test Mail from Antigravity Agent";
+
+                var bodyBuilder = new BodyBuilder();
+                bodyBuilder.TextBody = "This is a verification email sent at: " + DateTime.Now;
+                mimeMessage.Body = bodyBuilder.ToMessageBody();
+
+                SmtpClient smtpClient = new SmtpClient();
+
+                smtpClient.Connect(senderHost, senderPort, MailKit.Security.SecureSocketOptions.StartTls);
+
+                smtpClient.Authenticate(senderMail, senderPassword.Replace(" ", ""));
+
+                smtpClient.Send(mimeMessage);
+
+                smtpClient.Disconnect(true);
+
+                return Content("Test mail sent successfully to ukadir231@gmail.com! Please check your inbox/spam folder.");
+            }
+            catch (Exception ex)
+            {
+                return Content($"Error sending mail: {ex.Message}. \nCheck that you updated the sender credentials in MailController.cs!");
+            }
         }
     }
 }

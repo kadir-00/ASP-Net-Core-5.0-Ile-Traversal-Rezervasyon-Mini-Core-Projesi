@@ -1,53 +1,103 @@
-@model List<RapidApiMovieListDTO>
+@using WebUI.Areas.Admin.Models
+@model List<RapidApiMovieViewModel>
 @{
     ViewData["Title"] = "Index";
-    Layout = "_LayoutAdmin";
-    int count = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <div class="container-fluid py-4">
+    @if (ViewBag.Error != null)
+
+
+
+    {
+        <div class="alert alert-danger text-white">@ViewBag.Error</div>
+    }
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>Film Listesi</h6>
-                    <hr>
+                    <h6>IMDb En İyi 100 Film Listesi</h6>
                 </div>
-                <div class="card-body pt-0 pb-2">
+                <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        @if (Model.Any())
-                        {
-                            <table class="table align-items-center mb-0">
-                                <thead>
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#
+                                    </th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Film Başlığı</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Puan</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Yapım Yılı</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Fragman</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                {
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Sıra No</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Resim</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Başlık</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Yıl</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Puan</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Açıklama</th>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">@item.rank</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">@item.title</p>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="badge badge-sm bg-gradient-success">@item.rating</span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <span class="text-secondary text-xs font-weight-bold">@item.year</span>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <a href="@item.trailer" target="_blank"
+                                                class="btn btn-outline-info btn-sm">Fragman İzle</a>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>@count</td>
-                                            <td><img src="@item.big_image" alt="" style="width: 50px; height: 50px;"></td>
-                                            <td>@item.title</td>
-                                            <td>@item.year</td>
-                                            <td>@item.rating</td>
-                                            <td style="max-width: 400px;">@item.description</td>
-                                        </tr>
-                                        count++;
-                                    }
-                                </tbody>
-                            </table>
-                        } else
-                        {
-                            <div class="alert alert-warning" role="alert">Henüz bir öge mevcut değil</div>
-                            <hr>
-                        }
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
