@@ -1,79 +1,125 @@
-# 🌍 Traversal - Seyahat Rezervasyon Projesi
+![.NET Core](https://img.shields.io/badge/.NET%20Core-5.0-512BD4?logo=dotnet&logoColor=white)
+![Architecture](https://img.shields.io/badge/Architecture-CQRS%20%26%20MediatR-blue?style=flat&logo=csharp)
+![RealTime](https://img.shields.io/badge/RealTime-SignalR-lightgrey?style=flat)
+![Database](https://img.shields.io/badge/Database-MSSQL-CC2927?logo=microsoft-sql-server&logoColor=white)
+![API](https://img.shields.io/badge/Integration-RESTful%20API-green)
 
-![.NET Core](https://img.shields.io/badge/.NET%20Core-5.0%2F6.0-512BD4?style=flat&logo=dotnet)
-![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-336791?style=flat&logo=postgresql)
-![Architecture](https://img.shields.io/badge/Architecture-CQRS%20%26%20Onion-blue?style=flat)
-![SignalR](https://img.shields.io/badge/RealTime-SignalR-lightgrey?style=flat)
+# 🌍 Traversal - Seyahat Rezervasyon & Yönetim Sistemi
 
-**Traversal**, seyahat severlerin tur rotalarını inceleyebildiği, rezervasyon yapabildiği ve blog yazılarını okuyabildiği kapsamlı bir rezervasyon web uygulamasıdır.
+**Traversal**, bir seyahat acentesinin tüm iş süreçlerini dijitalleştirmek, kullanıcıların tur rezervasyonlarını yönetmek ve yöneticilere kapsamlı bir raporlama sunmak amacıyla geliştirilmiş, uçtan uca bir web uygulamasıdır.
 
-Bu proje, **Murat Yücedağ**'ın YouTube kanalındaki kapsamlı eğitim serisi takip edilerek geliştirilmiştir. Projede **SOLID** prensiplerine sadık kalınmış ve endüstri standardı olan **Design Pattern**'ler (CQRS, Mediator, Unit of Work) aktif olarak kullanılmıştır.
+Bu proje, **Murat Yücedağ** rehberliğinde (38 Saat / 100 Derslik Eğitim) **ASP.NET Core 5.0** altyapısı kullanılarak geliştirilmiştir. Projenin en önemli özelliği, **CQRS (Command Query Responsibility Segregation)** ve **MediatR** desenleri kullanılarak inşa edilmiş modern ve ölçeklenebilir mimarisidir.
+
+---
+
+## 🏗️ Mimari ve Tasarım Desenleri (Architecture)
+
+Proje, klasik katmanlı mimarinin ötesine geçerek, sorumlulukların ayrıştırıldığı gelişmiş desenleri barındırır:
+
+* **CQRS & MediatR:** Okuma (Query) ve Yazma (Command) işlemlerinin ayrıştırılması sayesinde performans ve yönetilebilirlik artırılmıştır.
+* **Repository Design Pattern:** Veri erişimi soyutlanarak kod tekrarı önlenmiştir.
+* **AutoMapper:** Veri transfer nesneleri (DTO) ile entity'ler arasındaki eşleşmeler otomatikleştirilmiştir.
+* **FluentValidation:** Sunucu taraflı doğrulama kuralları katı bir şekilde uygulanmıştır.
+
+---
+
+## 📸 Proje Arayüzleri
+
+Proje; **Vitrin (UI)**, **Misafir (User)** ve **Yönetim (Admin)** olmak üzere 3 temel modülden oluşur.
+
+### 1. ✨ Web Sitesi (Vitrin)
+Ziyaretçilerin rotaları incelediği ön yüz.
+* **Rotalar & Blog:** Tur detayları, blog yazıları ve kullanıcı yorumları.
+* **Rehberler:** Aktif tur rehberlerinin listelenmesi.
+* **Etkileşim:** İletişim formu ve bülten (Mail) aboneliği.
+
+### 2. 🌞 Kullanıcı Paneli (Member)
+Kayıtlı kullanıcıların kendi işlemlerini yönettiği alan.
+* **Rezervasyon Yönetimi:**
+    * 🟢 Aktif Rezervasyonlar
+    * 🟡 Onay Bekleyen Rezervasyonlar
+    * 🔴 Geçmiş Rezervasyonlar
+* **Çoklu Dil Desteği (Localization):** Panel dili **Türkçe, İngilizce veya Fransızca** olarak değiştirilebilir.
+* **Profil:** Bilgi güncelleme, fotoğraf yükleme ve yorum yönetimi.
+
+### 3. 🔑 Admin Paneli
+Acentenin tüm operasyonel süreçlerinin yönetildiği merkez.
+* **Raporlama:** Kullanıcı ve tur verilerinin **Excel** ve **PDF** formatında dışarı aktarılması.
+* **Hızlı İşlemler (AJAX):** Sayfa yenilenmeden rota ekleme/silme/güncelleme.
+* **İletişim:** Mail gönderme, duyuru yayınlama ve mesaj kutusu yönetimi.
+* **Rol Yönetimi:** Admin ve kullanıcı yetkilendirmeleri.
+* **Dashboard:** Site istatistikleri ve grafiksel analizler.
+
+## 🚀 Öne Çıkan Teknolojik Özellikler
+
+### 📡 SignalR (Gerçek Zamanlı İletişim)
+Projede **SignalR** teknolojisi kullanılarak, anlık ziyaretçi sayıları ve grafik verileri **canlı olarak (real-time)** dashboard üzerinde güncellenmektedir.
+
+### 📧 Gelişmiş Mail & SMTP Entegrasyonu
+Proje, kullanıcı etkileşimini artırmak için **MimeKit** ve **MailKit** kütüphaneleri ile güçlendirilmiş bir mail servisine sahiptir.
+* **Onay ve Bildirimler:** Yeni kayıt olan kullanıcılara "Hoş Geldiniz" maili ve rezervasyon onayı gönderimi.
+* **Şifre Sıfırlama:** "Şifremi Unuttum" senaryosunda güvenli token içeren mail gönderimi.
+* **Toplu İletişim:** Admin panelinden tüm kullanıcılara veya belirli bir aboneye html formatında duyuru maili atabilme.
+
+### 🌐 API Entegrasyonları
+* **Google Maps / Map API:** Tur rotalarının harita üzerinde gösterimi.
+* **RESTful API:** Proje, dış servislere veri sağlayacak API uçlarına sahiptir.
+* **Rapid API:** (Booking veya IMDb API gibi) Dış kaynaklardan veri çekme işlemleri.
+
+### 📊 Veri Analizi ve Raporlama
+Admin panelinde oluşturulan dinamik listeler, tek tıkla **Excel** veya **PDF** formatında raporlanabilir.
+
+## 🛠 Kullanılan Teknolojiler
+
+| Kategori | Teknoloji / Kütüphane |
+| :--- | :--- |
+| **Backend** | ASP.NET Core 5.0 |
+| **Mimari** | **CQRS, MediatR**, Onion Architecture |
+| **Veritabanı** | MSSQL Server, Entity Framework Core |
+| **Real-Time** | **SignalR** |
+| **Frontend** | HTML5, CSS3, Bootstrap, jQuery, **AJAX** |
+| **Validasyon** | FluentValidation |
+| **Mapping** | AutoMapper |
+| **Localization** | Çoklu Dil Desteği (TR/EN/FR) |
+
 
 ---
 
 ## 📸 Proje Ekran Görüntüleri
 
-*(Ekran görüntüleri eklenecektir...)*
+### 🏠 Ana Sayfa ve Kullanıcı Arayüzü (UI)
+<p align="center">
+  <img src="screenshots/anasayfa-1.png" alt="Ana Sayfa Görünümü" width="30%" />
+  &nbsp;
+  <img src="screenshots/anasayfa-2.png" alt="Rota Detayları" width="30%" />
+  &nbsp;
+  <img src="screenshots/anasayfa-3.png" alt="Kullanıcı Paneli" width="30%" />
+</p>
+
+### 🛠️ Admin Yönetim Paneli
+<p align="center">
+  <img src="screenshots/admin-1.png" alt="Admin Dashboard" width="30%" />
+  &nbsp;
+  <img src="screenshots/admin-2.png" alt="Admin Rota İşlemleri" width="30%" />
+  &nbsp;
+  <img src="screenshots/admin-3.png" alt="Admin İstatistikler" width="30%" />
+</p>
 
 ---
 
-## 🏗️ Mimari ve Tasarım Desenleri
+### 🏗️ CQRS Mimari Yapısı (Klasör Düzeni)
+<p align="center">
+  <img src="screenshots/cqrs-pattern.png" alt="CQRS Mimari Yapısı" width="75%" />
+</p>
 
-Bu proje, sadece bir web sitesi değil, aynı zamanda ileri seviye bir mimari çalışmasıdır.
+### 🌐 Rapid API Entegrasyonu
+<p align="center">
+  <img src="screenshots/rapid-api.png" alt="Rapid API Entegrasyonu" width="75%" />
+</p>
 
-* **CQRS (Command Query Responsibility Segregation):** Okuma ve Yazma işlemlerini **MediatR** kütüphanesi ile ayırarak daha ölçeklenebilir bir yapı kuruldu.
-* **Repository Design Pattern:** Veri erişim katmanı soyutlanarak kod tekrarı önlendi.
-* **Unit of Work:** Veritabanı işlemlerinin toplu ve güvenli (transactional) bir şekilde yürütülmesi sağlandı.
-* **Dependency Injection (DI):** Bağımlılıklar gevşek bağlı (loosely coupled) hale getirildi.
-
----
-
-## 🚀 Öne Çıkan Özellikler
-
-### 🔐 Kimlik ve Güvenlik (Identity)
-* Kullanıcı Kayıt (Register) ve Giriş (Login) işlemleri.
-* Rol Bazlı Yetkilendirme (Admin, Member, Editor vb.).
-* "Şifremi Unuttum" (Password Reset) senaryoları.
-
-### 🌐 Web & İletişim
-* **SignalR:** Anlık bildirimler ve canlı veri akışı (Örn: Anlık ziyaretçi sayısı veya admin bildirimleri).
-* **Localization:** Çoklu dil desteği altyapısı.
-* **Mail Gönderme:** SMTP protokolü ile kullanıcı bilgilendirme mailleri.
-* **Ajax:** Sayfa yenilenmeden yapılan asenkron işlemler.
-
-### 💾 Veri ve Raporlama
-* **PostgreSQL:** Veritabanı olarak PostgreSQL kullanıldı.
-* **Raporlama:** Verilerin **Excel** ve **PDF** formatında dışarı aktarılması (Export).
-* **Search:** Site içi dinamik arama motoru.
-
-### 🔌 API Entegrasyonları
-* **Web API:** Projenin mobil veya diğer servislerle haberleşmesi için RESTful servisler.
-* **Rapid API:** Dış kaynaklardan (Booking, IMDb vb. gibi servislerden) veri çekme işlemleri.
-
----
-
-## 🛠 Kullanılan Teknolojiler ve Kütüphaneler
-
-| Kategori | Teknoloji / Kütüphane |
-| :--- | :--- |
-| **Framework** | .NET Core MVC |
-| **Veritabanı** | PostgreSQL |
-| **ORM** | Entity Framework Core |
-| **Mimari Desenler** | CQRS, Mediator, Unit of Work, Repository Pattern |
-| **Mapping** | AutoMapper |
-| **Validasyon** | Fluent Validation |
-| **Frontend** | HTML5, CSS3, Bootstrap, View Component |
-| **Real-Time** | SignalR |
-| **Diğer** | Areas, DTOs, Linq |
-
-
----
-
-## 👏 Teşekkür
-
-Bu projenin geliştirilmesindeki kapsamlı anlatımı ve rehberliği için **Murat Yücedağ** hocama teşekkür ederim.
-
-* **Kurs Platformu:** YouTube
-* **Eğitmen:** Murat Yücedağ
+### 📩 Mail Gönderme Servisi
+<p align="center">
+  <img src="screenshots/mail-service.png" alt="Mail Gönderme İşlemi" width="75%" />
+</p>
 
 ---

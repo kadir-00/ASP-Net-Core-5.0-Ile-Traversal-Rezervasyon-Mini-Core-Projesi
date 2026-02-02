@@ -58,12 +58,21 @@ namespace WebUI.Areas.Admin.Controllers
             var jsonData = JsonConvert.SerializeObject(visitorCreateDTO);
             var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-            var responseMessage = await client.PostAsync("https://localhost:7253/api/Visitor", content);
-            if (responseMessage.IsSuccessStatusCode)
+            try
             {
-                TempData["icon"] = "success";
-                TempData["text"] = "İşlem başarılı.";
-                return RedirectToAction("VisitorList", "Visitor");
+                // CHECK: Open your API project's Properties/launchSettings.json and confirm it is running on https://localhost:7253. If it's different, update this URL.
+                var responseMessage = await client.PostAsync("https://localhost:7253/api/Visitor", content);
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    TempData["icon"] = "success";
+                    TempData["text"] = "İşlem başarılı.";
+                    return RedirectToAction("VisitorList", "Visitor");
+                }
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "API ile bağlantı kurulamadı. Lütfen API projesinin (Port 7253) çalıştığından emin olun.");
+                return View(visitorCreateDTO);
             }
             return View(visitorCreateDTO);
         }
