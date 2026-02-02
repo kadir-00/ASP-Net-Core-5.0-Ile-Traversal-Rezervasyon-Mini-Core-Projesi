@@ -89,11 +89,11 @@ Admin panelinde oluşturulan dinamik listeler, tek tıkla **Excel** veya **PDF**
 
 ### 🏠 Ana Sayfa ve Kullanıcı Arayüzü (UI)
 <p align="center">
-  <img src="screenshots/anasayfa-1.png" alt="Ana Sayfa Görünümü" width="30%" />
+  <img src="screenshots/anasayfa1.png" alt="Ana Sayfa Görünümü" width="30%" />
   &nbsp;
-  <img src="screenshots/anasayfa-2.png" alt="Rota Detayları" width="30%" />
+  <img src="screenshots/anasayfa2.png" alt="Rota Detayları" width="30%" />
   &nbsp;
-  <img src="screenshots/anasayfa-3.png" alt="Kullanıcı Paneli" width="30%" />
+  <img src="screenshots/kullanici.png" alt="Kullanıcı Paneli" width="30%" />
 </p>
 
 ### 🛠️ Admin Yönetim Paneli
@@ -107,19 +107,38 @@ Admin panelinde oluşturulan dinamik listeler, tek tıkla **Excel** veya **PDF**
 
 ---
 
-### 🏗️ CQRS Mimari Yapısı (Klasör Düzeni)
+### 🏗️ CQRS Mimari Yapısı 
 <p align="center">
-  <img src="screenshots/cqrs-pattern.png" alt="CQRS Mimari Yapısı" width="75%" />
+  <img src="screenshots/cqrsturlar.png" alt="CQRS Mimari Yapısı" width="75%" />
 </p>
 
 ### 🌐 Rapid API Entegrasyonu
 <p align="center">
-  <img src="screenshots/rapid-api.png" alt="Rapid API Entegrasyonu" width="75%" />
+  <img src="screenshots/apifilm.png" alt="Rapid API Entegrasyonu" width="75%" />
 </p>
 
 ### 📩 Mail Gönderme Servisi
 <p align="center">
-  <img src="screenshots/mail-service.png" alt="Mail Gönderme İşlemi" width="75%" />
+  <img src="screenshots/mail1.png" alt="Mail Gönderme İşlemi" width="75%" />
+</p>
+  &nbsp;
+<p align="center">
+  <img src="screenshots/mail2.png" alt="Mail Gönderme İşlemi" width="75%" />
 </p>
 
+### 🌐 Ajax Entegrasyonu
+<p align="center">
+  <img src="screenshots/ajaxodalar.png" alt="Ajax Entegrasyonu" width="75%" />
+</p>
+
+
+### 🌐 Dosya Indirme Islemi
+<p align="center">
+  <img src="screenshots/dosyaindirme.png" alt="Dosya Indirme Islemi" width="75%" />
+</p>
+
+### 🌐 ID Ile Para Gonderme Islemi
+<p align="center">
+  <img src="screenshots/paragonderme.png" alt="ID Ile Para Gonderme Islemi" width="75%" />
+</p>
 ---
