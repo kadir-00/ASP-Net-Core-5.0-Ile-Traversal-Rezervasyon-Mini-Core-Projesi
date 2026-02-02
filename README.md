@@ -98,11 +98,11 @@ Admin panelinde oluşturulan dinamik listeler, tek tıkla **Excel** veya **PDF**
 
 ### 🛠️ Admin Yönetim Paneli
 <p align="center">
-  <img src="screenshots/admin-1.png" alt="Admin Dashboard" width="30%" />
+  <img src="screenshots/admin1.png" alt="Admin" width="30%" />
   &nbsp;
-  <img src="screenshots/admin-2.png" alt="Admin Rota İşlemleri" width="30%" />
+  <img src="screenshots/admin2.png" alt="Admin" width="30%" />
   &nbsp;
-  <img src="screenshots/admin-3.png" alt="Admin İstatistikler" width="30%" />
+  <img src="screenshots/admin3.png" alt="Admin" width="30%" />
 </p>
 
 ---
